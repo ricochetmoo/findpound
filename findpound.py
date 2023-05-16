@@ -127,7 +127,6 @@ def test_for_valid_permutations(compound, primary_element, state_of_interest):
 	found_permutation = False
 
 	for permutation in permutations:
-		print(permutation)
 		if sum_permutation(permutation) == 0:
 			found_permutation = True
 			break
