@@ -133,7 +133,7 @@ def test_for_valid_permutations(compound, primary_element, state_of_interest):
 	
 	return found_permutation
 
-print("Findpound v0.0.1")
+print("Findpound v1.0.0")
 
 filepath = input("Path to file of compounds (compounds.txt): ")
 
