@@ -140,15 +140,27 @@ filepath = input("Path to file of compounds (compounds.txt): ")
 if filepath == "":
 	filepath = "compounds.txt"
 
-max_number_of_elements = int(input("Max number of elements in compound: "))
+max_number_of_elements = input("Max number of elements in compound (4): ")
+
+if max_number_of_elements == "":
+	max_number_of_elements = 4
+else:
+	max_number_of_elements = int(max_number_of_elements)
+
 element_of_interest_text = input("Comma-separated list of elements required: ")
-primary_element = input("Element of interest: ")
+
+elements_of_interest = element_of_interest_text.split(",")
+
+primary_element = input("Element of interest (" + elements_of_interest[0] + "): ")
+
+if primary_element == "":
+	primary_element = elements_of_interest[0]
+
 state_of_interest = input("State of interest: ")
 
 compounds = []
 valid_compounds = []
 decimals = []
-elements_of_interest = element_of_interest_text.split(",")
 
 file = open(filepath, 'r')
 
