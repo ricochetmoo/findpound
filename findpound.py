@@ -164,7 +164,7 @@ primary_element = input("Element of interest (" + elements_of_interest[0] + "): 
 if primary_element == "":
 	primary_element = elements_of_interest[0]
 
-state_of_interest = input("State of interest: ")
+state_of_interest = input("Oxidation state of interest: ")
 
 compounds = []
 valid_compounds = []
