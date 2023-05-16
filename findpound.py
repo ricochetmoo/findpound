@@ -2,6 +2,14 @@
 
 import re, itertools
 
+def reverse_compound_dictionary(compound):
+	string = ""
+	
+	for element, subscript in compound.items():
+		string += element + subscript
+	
+	return string
+
 def make_compound_dictionary(compound):
 	compound = re.sub('\n', '', compound)
 	element_array = re.findall('[^\d]+', compound)
@@ -187,6 +195,6 @@ file.close()
 
 for compound in compounds:
 	if test_for_valid_permutations(compound, primary_element, state_of_interest):
-		valid_compounds.append(compound)
+		valid_compounds.append(reverse_compound_dictionary(compound))
 
 print(valid_compounds)
