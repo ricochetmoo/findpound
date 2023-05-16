@@ -109,22 +109,30 @@ def sum_permutation(permutation):
 	return sum
 
 
-def test_for_valid_computations(compound):
+def test_for_valid_permutations(compound, primary_element, state_of_interest):
 	valence_states_list = []
 
 	for element, subscript in compound.items():
-		element_vs_list = elements[element]
-		element_vs_list_multiplied = []
-		for vs in element_vs_list:
-			element_vs_list_multiplied.append(vs * int(subscript))
-		valence_states_list.append(element_vs_list_multiplied)
+		if element == primary_element:
+			valence_states_list.append([int(state_of_interest) * int(subscript)])
+		else:
+			element_vs_list = elements[element]
+			element_vs_list_multiplied = []
+			for vs in element_vs_list:
+				element_vs_list_multiplied.append(vs * int(subscript))
+			valence_states_list.append(element_vs_list_multiplied)
 
 	permutations = itertools.product(*valence_states_list)
+
+	found_permutation = False
 
 	for permutation in permutations:
 		print(permutation)
 		if sum_permutation(permutation) == 0:
-			return True
+			found_permutation = True
+			break
+	
+	return found_permutation
 
 print("Findpound v0.0.1")
 
@@ -134,10 +142,12 @@ if filepath == "":
 	filepath = "compounds.txt"
 
 max_number_of_elements = int(input("Max number of elements in compound: "))
-element_of_interest_text = input("Comma-separated list of elements of interest: ")
-state_of_interest = input("State of interest (integer): ")
+element_of_interest_text = input("Comma-separated list of elements required: ")
+primary_element = input("Element of interest: ")
+state_of_interest = input("State of interest: ")
 
 compounds = []
+valid_compounds = []
 decimals = []
 elements_of_interest = element_of_interest_text.split(",")
 
@@ -162,10 +172,10 @@ while True:
 			else:
 				compounds.append(make_compound_dictionary(line))
 
-print(compounds)
+file.close()
 
 for compound in compounds:
-	if test_for_valid_computations(compound):
-		print(compound)
+	if test_for_valid_permutations(compound, primary_element, state_of_interest):
+		valid_compounds.append(compound)
 
-file.close()
+print(valid_compounds)
