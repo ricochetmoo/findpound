@@ -168,5 +168,4 @@ for compound in compounds:
 	if test_for_valid_computations(compound):
 		print(compound)
 
-
 file.close()
