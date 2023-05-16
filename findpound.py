@@ -111,8 +111,8 @@ elements = {
 def sum_permutation(permutation):
 	sum = 0
 
-	for element in permutation:
-		sum += element
+	for oxidation_state in permutation:
+		sum += oxidation_state
 	
 	return sum
 
@@ -183,6 +183,7 @@ while True:
 	for element_of_interest in elements_of_interest:
 		if element_of_interest not in line:
 			has_interests = False
+			break
 
 	if has_interests == True:
 		if len(re.split('\d+', line)) - 1 <= max_number_of_elements:
