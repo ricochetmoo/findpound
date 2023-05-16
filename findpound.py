@@ -1,8 +1,9 @@
 #Copyright (c) James Barber 2023 All Rights Reserved
 
-import re
+import re, itertools
 
 def make_compound_dictionary(compound):
+	compound = re.sub('\n', '', compound)
 	element_array = re.findall('[^\d]+', compound)
 	subscript_array = re.findall('\d+', compound)
 
@@ -99,6 +100,32 @@ elements = {
 	'Bi': [3, 5]
 }
 
+def sum_permutation(permutation):
+	sum = 0
+
+	for element in permutation:
+		sum += element
+	
+	return sum
+
+
+def test_for_valid_computations(compound):
+	valence_states_list = []
+
+	for element, subscript in compound.items():
+		element_vs_list = elements[element]
+		element_vs_list_multiplied = []
+		for vs in element_vs_list:
+			element_vs_list_multiplied.append(vs * int(subscript))
+		valence_states_list.append(element_vs_list_multiplied)
+
+	permutations = itertools.product(*valence_states_list)
+
+	for permutation in permutations:
+		print(permutation)
+		if sum_permutation(permutation) == 0:
+			return True
+
 print("Findpound v0.0.1")
 
 filepath = input("Path to file of compounds (compounds.txt): ")
@@ -136,5 +163,10 @@ while True:
 				compounds.append(make_compound_dictionary(line))
 
 print(compounds)
-	
+
+for compound in compounds:
+	if test_for_valid_computations(compound):
+		print(compound)
+
+
 file.close()
