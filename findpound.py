@@ -107,6 +107,7 @@ elements = {
 	'Pb': [2, 4],
 	'Bi': [3, 5]
 }
+radioactive_elements = ['Tc', 'Pm', 'Po', 'At', 'Rn', 'Fr', 'Ra', 'At', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr', 'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn', 'Uut', 'Fl', 'Uup', 'Lv', 'Uus', 'Uuo']
 
 def sum_permutation(permutation):
 	sum = 0
@@ -190,7 +191,17 @@ while True:
 			if '.' in line:
 				decimals.append(line)
 			else:
-				compounds.append(make_compound_dictionary(line))
+				compound_dictionary = make_compound_dictionary(line)
+
+				contains_radioactive = False
+
+				for element in compound_dictionary:
+					if element in radioactive_elements:
+						contains_radioactive = True
+						break
+
+				if not contains_radioactive:
+					compounds.append(compound_dictionary)
 
 file.close()
 
