@@ -179,29 +179,27 @@ while True:
 	if not line:
 		break
 
-	has_interests = True
+	if len(re.split('\d+', line)) - 1 <= max_number_of_elements:
+		if '.' in line:
+			decimals.append(line)
+		else:
+			compound_dictionary = make_compound_dictionary(line)
 
-	for element_of_interest in elements_of_interest:
-		if element_of_interest not in line:
-			has_interests = False
-			break
+			has_interests = True
+			contains_radioactive = False
 
-	if has_interests == True:
-		if len(re.split('\d+', line)) - 1 <= max_number_of_elements:
-			if '.' in line:
-				decimals.append(line)
-			else:
-				compound_dictionary = make_compound_dictionary(line)
+			for element_of_interest in elements_of_interest:
+				if element_of_interest not in compound_dictionary:
+					has_interests = False
+					break
 
-				contains_radioactive = False
+			for element in compound_dictionary:
+				if element in radioactive_elements:
+					contains_radioactive = True
+					break
 
-				for element in compound_dictionary:
-					if element in radioactive_elements:
-						contains_radioactive = True
-						break
-
-				if not contains_radioactive:
-					compounds.append(compound_dictionary)
+			if not contains_radioactive and has_interests:
+				compounds.append(compound_dictionary)
 
 file.close()
 
