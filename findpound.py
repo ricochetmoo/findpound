@@ -1,4 +1,4 @@
-#Copyright (c) James Barber 2023 All Rights Reserved
+#Copyright (c) James Barber and Emmeline Poole 2023 All Rights Reserved
 
 import re, itertools
 
